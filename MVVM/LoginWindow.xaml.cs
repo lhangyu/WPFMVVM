@@ -1,4 +1,5 @@
-﻿using MVVM.ViewModel.Login;
+﻿using MVVM.ViewModel.Common;
+using MVVM.ViewModel.Login;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +25,7 @@ namespace MVVM
         {
             InitializeComponent();
             this.DataContext = new LoginViewModel();
+            WindowManager.Register<MainWindow>("MainWindow");
         }
     }
 }

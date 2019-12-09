@@ -59,8 +59,12 @@
     <Compile Include="Model\Login\LogninModel.cs" />
     <Compile Include="Model\Student\StudentModel.cs" />
     <Compile Include="ViewModel\Common\BaseCommand.cs" />
+    <Compile Include="ViewModel\Common\CheckConverter.cs" />
     <Compile Include="ViewModel\Common\EventCommand.cs" />
     <Compile Include="ViewModel\Common\NotificationObject.cs" />
+    <Compile Include="ViewModel\Common\PasswordBoxHelper.cs" />
+    <Compile Include="ViewModel\Common\WindowBehavior.cs" />
+    <Compile Include="ViewModel\Common\WindowManager.cs" />
     <Compile Include="ViewModel\Login\LoginViewModel.cs" />
     <Compile Include="ViewModel\Student\StudentViewModel.cs" />
     <Page Include="LoginWindow.xaml">

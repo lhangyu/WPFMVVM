@@ -3,16 +3,38 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:local="clr-namespace:MVVM"
+        xmlns:c="clr-namespace:MVVM.ViewModel.Common"
         mc:Ignorable="d"
         Title="LoginWindow" Height="350" Width="525">
+    <Window.Resources>
+        <c:CheckConverter x:Key="CheckConverter"/>
+    </Window.Resources>
+    <i:Interaction.Behaviors>
+        <c:WindowBehavior Close="{Binding ToClose}"/>
+    </i:Interaction.Behaviors>
     <Grid>
         <Label Content="用户名" Height="28" HorizontalAlignment="Left" Margin="54,23,0,0"  VerticalAlignment="Top" />
         <TextBox Text="{Binding UserName}"  Height="23" HorizontalAlignment="Right" Margin="0,27,289,0" VerticalAlignment="Top" Width="120" />
         <Label Content="密码" Height="28" HorizontalAlignment="Left" Margin="54,61,0,0"  VerticalAlignment="Top" />
-        <TextBox Text="{Binding UserName}" IsReadOnly="True" Height="23" HorizontalAlignment="Left" Margin="94,65,0,0" Name="textBoxStudentName" VerticalAlignment="Top" Width="120" />
-        <RadioButton Content="男" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,27,289,0"/>
-        <RadioButton Content="女" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,61,0,0"/>
-        <Button Grid.Row="3" Grid.ColumnSpan="2" Content="登录" Width="200" Height="30" Command="{Binding ClickLoginCommand}"/>
+        <PasswordBox Margin="108,65,289,231" c:PasswordBoxHelper.Password="{Binding Password,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
+            <i:Interaction.Behaviors>
+                <c:PasswordBoxBehavior/>
+            </i:Interaction.Behaviors>
+        </PasswordBox>
+        <RadioButton Grid.Row="2" Grid.Column="0" Content="男" Margin="0,27,289,0" IsChecked="{Binding Gender,Mode=TwoWay,Converter={StaticResource CheckConverter},ConverterParameter=1}"/>
+        <RadioButton Grid.Row="2" Grid.Column="1" Content="女" Margin="0,61,0,0" IsChecked="{Binding Gender,Mode=TwoWay,Converter={StaticResource CheckConverter},ConverterParameter=2}"/>
+
+        <!--<Button Grid.Row="3" Grid.ColumnSpan="2" Content="登录" Width="200" Height="30" Command="{Binding ClickLoginCommand}"/>-->
+
+        <Button Grid.Row="3" Grid.ColumnSpan="2" Content="登录" Width="200" Height="30">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="Click">
+                    <c:EventCommand Command="{Binding LoginClick}"/>
+                    <!--<c:EventCommand Command="{Binding ClickLoginCommand}"/>-->
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </Button>
     </Grid>
 </Window>
