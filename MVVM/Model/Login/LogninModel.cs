@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MVVM.ViewModel
+namespace MVVM.Model.Login
 {
     public class LogninModel
     {
@@ -28,6 +28,6 @@ namespace MVVM.ViewModel
             /// 性别
             /// </summary>
             public int Gender { get; set; }
-            }
+        }
     }
 }

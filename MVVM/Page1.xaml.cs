@@ -1,6 +1,4 @@
-﻿
-using MVVM.ViewModel.Student;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,14 +16,13 @@ using System.Windows.Shapes;
 namespace MVVM
 {
     /// <summary>
-    /// MainWindow.xaml 的交互逻辑
+    /// Page1.xaml 的交互逻辑
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class Page1 : Page
     {
-        public MainWindow()
+        public Page1()
         {
             InitializeComponent();
-            this.DataContext = new Student1ViewModel();
         }
     }
 }

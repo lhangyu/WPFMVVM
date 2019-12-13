@@ -1,67 +1,123 @@
 ﻿using MVVM.Model.Student;
+using MVVM.ViewModel.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Input;
 
 namespace MVVM.ViewModel.Student
 {
-    public class StudentViewModel
+    public class StudentViewModel: NotificationObject
     {
-            public DelegateCommand ShowCommand { get; set; }
-            public StudentModel Student { get; set; }
-            public StudentViewModel()
-            {
-                Student = new StudentModel();
-                ShowCommand = new DelegateCommand();
-                ShowCommand.ExecuteCommand = new Action<object>(ShowStudentData);
-            }
-            private void ShowStudentData(object obj)
-            {
-                Student.StudentId = 1;
-                Student.StudentName = "tiana";
-                Student.StudentAge = 20;
-                Student.StudentEmail = "8644003248@qq.com";
-                Student.StudentSex = "大帅哥";
-            }
+        private StudentModel obj = new StudentModel();
 
-        }
+        private BaseCommand showStudentData;
 
-        public class DelegateCommand : ICommand
+        public StudentViewModel()
         {
-            public Action<object> ExecuteCommand = null;
-            public Func<object, bool> CanExecuteCommand = null;
-            public event EventHandler CanExecuteChanged;
 
-            public bool CanExecute(object parameter)
+        }
+
+        /// <summary>
+        /// 学号
+        /// </summary>
+        public int StudentId
+        {
+            get
             {
-                if (CanExecuteCommand != null)
-                {
-                    return this.CanExecuteCommand(parameter);
-                }
-                else
-                {
-                    return true;
-                }
+                return obj.StudentId;
             }
-
-            public void Execute(object parameter)
+            set
             {
-                if (this.ExecuteCommand != null)
-                {
-                    this.ExecuteCommand(parameter);
-                }
-            }
-
-            public void RaiseCanExecuteChanged()
-            {
-                if (CanExecuteChanged != null)
-                {
-                    CanExecuteChanged(this, EventArgs.Empty);
-                }
+                obj.StudentId = value;
+                this.RaisePropertyChanged("StudentId");
             }
         }
-    
+
+        /// <summary>
+        /// 姓名
+        /// </summary>
+        public string StudentName
+        {
+            get
+            {
+                return obj.StudentName;
+            }
+            set
+            {
+                obj.StudentName = value;
+                this.RaisePropertyChanged("StudentName");
+            }
+        }
+
+        /// <summary>
+        /// 年龄
+        /// </summary>
+        public int StudentAge
+        {
+            get
+            {
+                return obj.StudentAge;
+            }
+            set
+            {
+                obj.StudentAge = value;
+                this.RaisePropertyChanged("StudentAge");
+            }
+        }
+
+        /// <summary>
+        /// email
+        /// </summary>
+        public string StudentEmail
+        {
+            get
+            {
+                return obj.StudentEmail;
+            }
+            set
+            {
+                obj.StudentEmail = value;
+                this.RaisePropertyChanged("StudentEmail");
+            }
+        }
+
+        /// <summary>
+        /// 性别
+        /// </summary>
+        public string StudentSex
+        {
+            get
+            {
+                return obj.StudentSex;
+            }
+            set
+            {
+                obj.StudentSex = value;
+                this.RaisePropertyChanged("StudentSex");
+            }
+        }
+
+        public BaseCommand ShowStudentData
+        {
+             get
+            {
+                if (showStudentData == null)
+                {
+                    showStudentData = new BaseCommand(new Action<object>(o =>
+                    {
+                        obj.StudentId = 1;
+                        obj.StudentName = "tiana";
+                        obj.StudentAge = 20;
+                        obj.StudentEmail = "8644003248@qq.com";
+                        obj.StudentSex = "大帅哥";
+                    }));
+                }
+                return showStudentData;
+            }
+        }
+
+        
+    }
 }
